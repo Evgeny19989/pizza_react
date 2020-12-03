@@ -3,7 +3,7 @@ const setSortBuy  = (name) =>({
     payload:name
 });
 
-const setCategory   = (index) =>({
+const setCategory   = (catIndex) =>({
     type:'SET_CATEGORY',
-    payload:index
+    payload:catIndex
 });

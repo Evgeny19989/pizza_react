@@ -10,7 +10,7 @@ const filters = (state = initialState, action) => {
             sortBy: action.payload
         }
     }
-    return;
+    return state;
 }
 
 export default  filters

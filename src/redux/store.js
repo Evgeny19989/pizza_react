@@ -1,17 +1,9 @@
 import {createStore} from 'redux'
+import rootReducer from "./reducers";
 
-let initialState = {}
 
-function storeReducer(state = initialState, action) {
-    switch (action.type) {
-        case 'HELLO':
-            console.log("action_hello")
-            break;
-        default:
-            break
-    }
-}
 
-const store = createStore(storeReducer)
+const store = createStore(rootReducer ,   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
+window.store =store
 export default store
