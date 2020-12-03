@@ -1,5 +1,5 @@
 const initialState = {
-    item: [],
+    items: [],
     isLoaded: false
 }
 
@@ -7,7 +7,7 @@ const pizzas = (state = initialState, action) => {
     if (action.type === 'SET_PIZZAS') {
         return {
             ...state,
-            item: action.payload
+            items: action.payload
         }
     }
     return state;

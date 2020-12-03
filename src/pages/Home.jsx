@@ -1,8 +1,18 @@
 import '../scss/app.scss'
 import {Categories, SortPopup, PizzaBlock} from "../components";
+import {useDispatch, useSelector} from "react-redux";
+import * as React from "react";
+import axios from "axios";
+import {setPizzas} from "../redux/actions/pizzas";
 
 
-export default function Home({items}) {
+export default function Home() {
+
+    const state= useSelector(({pizzas}) =>{
+        return {
+            items:pizzas.items
+        }
+    })
 
     return (
         <div className="container">
@@ -13,7 +23,7 @@ export default function Home({items}) {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {items.map(i => {
+                {state.items.map(i => {
                     return <PizzaBlock key={i.id} {...i}  />
                 })}
 
