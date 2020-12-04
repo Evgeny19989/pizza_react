@@ -1,28 +1,37 @@
 import '../scss/app.scss'
+import React from 'react'
 import {useState} from "react";
 /*import classNames from 'classnames'*/
 
-export default function Categories({items, onClick}) {
-    const [activeClass, setActiveClass] = useState(null)
+const Categories = React.memo(
+    function Categories({items, onClick}) {
+        const [activeClass, setActiveClass] = useState(null)
 
-    return (
-        <div className="categories">
-            <ul>
-                <li onClick={() => {
-                    setActiveClass(null)
-                }} className={activeClass === null ? 'active' : ''}>Все
-                </li>
-                {items &&
+        const onSelectedItem = (index) => {
+            setActiveClass(index)
+            onClick(index)
+        }
+
+        console.log("RERENDER")
+        return (
+            <div className="categories">
+                <ul>
+                    <li onClick={() => {
+                        setActiveClass(null)
+                    }} className={activeClass === null ? 'active' : ''}>Все
+                    </li>
+                    {items &&
                     items.map((i, index) => {
                         return <li className={activeClass === index ? 'active' : ''} onClick={() => {
-                            setActiveClass(index)
+                            onSelectedItem(index)
                         }} key={`${i}_${index}`}>{i}</li>
                     })
-                }
+                    }
 
-            </ul>
-        </div>
-    )
-}
+                </ul>
+            </div>
+        )
+    }
+)
 
-
+export default Categories
