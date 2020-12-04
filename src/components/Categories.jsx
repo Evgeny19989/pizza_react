@@ -4,8 +4,8 @@ import {useState} from "react";
 /*import classNames from 'classnames'*/
 
 const Categories = React.memo(
-    function Categories({items, onClick}) {
-        const [activeClass, setActiveClass] = useState(null)
+    function Categories({items, onClick ,activeCategory}) {
+        const [activeClass, setActiveClass] = useState(activeCategory)
 
         const onSelectedItem = (index) => {
             setActiveClass(index)
