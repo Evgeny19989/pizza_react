@@ -10,7 +10,7 @@ const categoryNames = ['Мясные', 'Вегетарианские', 'Грил
 const sortItemNames = [
     {name: 'популярности', type: 'popular'},
     {name: 'цене', type: 'price'},
-    {name: 'алфавиту', type: 'alphabet'},
+    {name: 'алфавиту', type: 'name'},
 ]
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
     const {category, sortBy} = useSelector(({filters}) => filters)
 
     React.useEffect(() => {
-        dispatch(fetchPizzas())
+        dispatch(fetchPizzas(category, sortBy))
     }, [category, sortBy]);
 
     const onSelectedCategory = React.useCallback(
@@ -38,6 +38,10 @@ export default function Home() {
             dispatch(setSortBuy(type))
         }, []
     )
+
+    const onAddPizza = (obj) =>{
+        console.log(obj)
+    }
 
     return (
         <div className="container">
@@ -53,7 +57,7 @@ export default function Home() {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {state.isLoaded ? state.items.map(i => {
-                        return <PizzaBlock key={i.id} {...i}  />
+                        return <PizzaBlock onClickAddPizza={onAddPizza} key={i.id} {...i}  />
 
                     }) :
                     Array(12)

@@ -8,9 +8,14 @@ export const setLoaded  = val =>{
     }
 }
 
-export const fetchPizzas = () => dispatch => {
+export const setPizzas = (items) => ({
+    type: 'SET_PIZZAS',
+    payload: items
+});
+
+export const fetchPizzas = (category, sortBy) => dispatch => {
     dispatch(setLoaded(false))
-    axios.get('http://localhost:3001/pizzas').then(({data}) => {
+    axios.get(`http://localhost:3001/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${sortBy}`).then(({data}) => {
         dispatch(setPizzas(data))
 
     });
@@ -18,7 +23,3 @@ export const fetchPizzas = () => dispatch => {
 }
 
 
-export const setPizzas = (items) => ({
-    type: 'SET_PIZZAS',
-    payload: items
-});

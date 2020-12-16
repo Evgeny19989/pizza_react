@@ -11,13 +11,11 @@ const Categories = React.memo(
             setActiveClass(index)
             onClick(index)
         }
-
-        console.log("RERENDER")
         return (
             <div className="categories">
                 <ul>
                     <li onClick={() => {
-                        setActiveClass(null)
+                        onSelectedItem(null)
                     }} className={activeClass === null ? 'active' : ''}>Все
                     </li>
                     {items &&

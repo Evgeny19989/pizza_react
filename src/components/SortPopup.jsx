@@ -4,12 +4,12 @@ import * as React from "react";
 
 
  const SortPopup = React.memo(
-     function SortPopup({items , onSelectedSort,activeSortBy ,onClickSortType}) {
+     function SortPopup({items ,activeSortBy ,onClickSortType}) {
          const [visiblePopup, setVisiblePopup] = useState(false)
          const toggleVisiblePopup = () => {
              setVisiblePopup(!visiblePopup)
          }
-         const activeLabel = items[activeSortBy].name
+         const activeLabel = items.find((obj) => obj.type === activeSortBy ).name
 
          const handleOutsideClick = (e)=>{
              if(!e.path.includes(sortRef.current)){
@@ -23,7 +23,7 @@ import * as React from "react";
          )
 
          const onClickItem = (index) =>{
-             onClickSortType(index)
+             onClickSortType(items[index].type)
              setVisiblePopup(false)
 
 

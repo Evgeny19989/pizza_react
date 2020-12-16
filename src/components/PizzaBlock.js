@@ -2,16 +2,28 @@ import '../scss/app.scss'
 import {useState} from "react";
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import Button from "./Button";
 
 
 
 
-function PizzaBlock({price, name, imageUrl, types ,sizes}) {
+function PizzaBlock({id,price, name, imageUrl, types ,sizes ,onClickAddPizza}) {
     const [activeType, setActiveType] = useState(types[0])
     const [activeSize, setActiveSize] = useState(sizes[0])
     const typeNames = ['тонкое' , 'традиционное'];
     const availableSizes = [26 , 30 , 40];
 
+    const onAddPizaa =() =>{
+        const obj = {
+            id,
+            price,
+            name,
+            imageUrl,
+            type:typeNames[activeType],
+            size: activeSize
+        }
+       onClickAddPizza(obj)
+    }
 
     return (
 
@@ -44,7 +56,7 @@ function PizzaBlock({price, name, imageUrl, types ,sizes}) {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button onClick={onAddPizaa} outline className='button--add'>
                     <svg
                         width="12"
                         height="12"
@@ -59,7 +71,7 @@ function PizzaBlock({price, name, imageUrl, types ,sizes}) {
                     </svg>
                     <span>Добавить</span>
                     <i>2</i>
-                </div>
+                </Button>
             </div>
         </div>
     );
@@ -68,12 +80,13 @@ function PizzaBlock({price, name, imageUrl, types ,sizes}) {
 
 
 PizzaBlock.propTypes = {
-    name:PropTypes.string.isRequired,
-    price:PropTypes.number.isRequired,
-    imageUrl:PropTypes.string.isRequired,
-    types:PropTypes.arrayOf(PropTypes.number).isRequired,
-    sizes:PropTypes.arrayOf(PropTypes.number).isRequired,
-};
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    types: PropTypes.arrayOf(PropTypes.number).isRequired,
+    sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+    onClickAddPizza: PropTypes.func,
+}
 
 
 export default PizzaBlock
