@@ -317,3 +317,9 @@ body {
     }
   }
 }
+
+
+.content__items_cart{
+  display: grid;
+  grid-template-columns: 1fr;
+}
