@@ -3,8 +3,11 @@
 import '../scss/app.scss'
 
 
-export default function Cartitem({type,price,img,name,size}) {
+export default function Cartitem({ id , RemoveOnClick , type,price,img,name,size, totalCnt}) {
 
+    const HandleRemoveOnClick = () =>{
+        RemoveOnClick(id)
+    }
     return (
         <div className="cart__item">
             <div className="cart__item-img">
@@ -14,6 +17,7 @@ export default function Cartitem({type,price,img,name,size}) {
                     alt="Pizza"
                 />
             </div>
+
             <div className="cart__item-info">
                 <h3>{name}</h3>
                 <p>{type} тесто, {size} см.</p>
@@ -31,7 +35,7 @@ export default function Cartitem({type,price,img,name,size}) {
                     </svg>
 
                 </div>
-                <b>2</b>
+                <b>{totalCnt}</b>
                 <div className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -48,8 +52,8 @@ export default function Cartitem({type,price,img,name,size}) {
             <div className="cart__item-price">
                 <b>{price} ₽</b>
             </div>
-            <div className="cart__item-remove">
-                <div className="button button--outline button--circle">
+            <div  className="cart__item-remove">
+                <div  onClick={HandleRemoveOnClick} className="button button--outline button--circle">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path

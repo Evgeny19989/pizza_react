@@ -8,6 +8,15 @@ body {
   background-color: $background;
 }
 
+h1{color: #181818}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;

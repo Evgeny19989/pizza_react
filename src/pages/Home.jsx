@@ -20,7 +20,8 @@ export default function Home() {
         return {
             items: pizzas.items,
             isLoaded: pizzas.isLoaded,
-            cartItems:cart.items
+            cartItems:cart.items,
+            totalCnt:cart.totalCnt
 
         }
     })
@@ -60,7 +61,7 @@ console.log(state.cartItems)
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {state.isLoaded ? state.items.map(i => {
-                        return <PizzaBlock onClickAddPizza={onAddPizza} key={i.id} {...i} addedPizzas={state.cartItems[i.id] && state.cartItems[i.id].length} />
+                        return <PizzaBlock addedPizzas={state.cartItems[i.id] && state.cartItems[i.id].items.length} onClickAddPizza={onAddPizza} key={i.id} {...i}   />
 
                     }) :
                     Array(12)

@@ -1,4 +1,4 @@
-import '../scss/app.scss'
+ import '../scss/app.scss'
 import {useState} from "react";
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
@@ -7,7 +7,7 @@ import Button from "./Button";
 
 
 
-function PizzaBlock({id,price, name, imageUrl, types ,sizes ,onClickAddPizza , addedPizzas}) {
+function PizzaBlock({id,price, name, imageUrl, types ,sizes ,onClickAddPizza,addedPizzas}) {
     const [activeType, setActiveType] = useState(types[0])
     const [activeSize, setActiveSize] = useState(sizes[0])
     const typeNames = ['тонкое' , 'традиционное'];
