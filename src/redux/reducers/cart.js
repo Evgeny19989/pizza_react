@@ -1,3 +1,5 @@
+import produce from 'immer'
+
 const initialState = {
     items: {},
     totalPrice: 0,
@@ -18,15 +20,15 @@ const getTotalSum = (obj, path) => {
     }, 0);
 };
 const getTotalPrice = arr => arr.reduce((sum, obj) => obj.price + sum, 0)
-const cart = (state = initialState, action) => {
+const cart = produce((draft , action) => {
     if (action.type === 'ADD_PIZZA_CART') {
 
-        const currentPizzaItems = !state.items[action.payload.id]
+        const currentPizzaItems = !draft.items[action.payload.id]
             ? [action.payload]
-            : [...state.items[action.payload.id].items, action.payload];
+            : [...draft.items[action.payload.id].items, action.payload];
 
         const newItems = {
-            ...state.items,
+            ...draft.items,
             [action.payload.id]: {
                 items: currentPizzaItems,
                 totalPrice: getTotalPrice(currentPizzaItems),
@@ -36,44 +38,36 @@ const cart = (state = initialState, action) => {
         const totalCount = getTotalSum(newItems, 'items.length');
         const totalPrice = getTotalSum(newItems, 'totalPrice');
 
-        return {
-            ...state,
-            items: newItems,
-            totalCnt: totalCount,
-            totalPrice
-        }
+        draft.items = newItems
+        draft.totalCnt = totalCount
+        draft.totalPrice = totalPrice
     }
-    if (action.type === 'SET_TOTAL_PRICE') {
-        return {
-            ...state,
-            totalPrice: action.payload
-        }
-    }
-    if (action.type === 'CLEAR_CART') {
-        return { totalPrice :0 ,totalCnt:0 ,items:[]}
 
+    if (action.type === 'SET_TOTAL_PRICE') {
+        draft.totalPrice = action.payload
+    }
+
+    if (action.type === 'CLEAR_CART') {
+        draft.totalPrice = 0
+        draft.totalCnt = 0
+        draft.items = []
     }
     if (action.type === 'SET_TOTAL_CNT') {
-        return {
-            ...state,
-            totalCnt: action.payload
-        }
+        draft.totalCnt = action.payload
     }
+
     if (action.type === 'REMOVE_ITEM') {
         const newObject = {
-            ...state.items,
+            ...draft.items,
         }
         const currentTotalPrice = newObject[action.payload].totalPrice
         const currentTotalCnt = newObject[action.payload].items.length
         delete newObject[action.payload]
-        return {
-            ...state,
-            items:newObject,
-            totalPrice:state.totalPrice - currentTotalPrice,
-            totalCnt: state.totalCnt - currentTotalCnt
-        }
+
+        draft.items = newObject
+        draft.totalPrice = draft.totalPrice - currentTotalPrice
+        draft.totalCnt = draft.totalCnt - currentTotalCnt
     }
-    return state;
-}
+},initialState)
 
 export default cart

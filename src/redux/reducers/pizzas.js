@@ -1,23 +1,19 @@
+import produce from 'immer'
+
 const initialState = {
     items: [],
     isLoaded: false
 }
 
-const pizzas = (state = initialState, action) => {
+const pizzas = produce((draft, action) => {
     if (action.type === 'SET_PIZZAS') {
-        return {
-            ...state,
-            items: action.payload,
-            isLoaded: true
-        }
+        draft.items = action.payload
+        draft.isLoaded = true
     }
     if (action.type === 'SET_LOADED') {
-        return {
-            ...state,
-            isLoaded: action.payload
-        }
+        draft.isLoaded = action.payload
     }
-    return state;
-}
+
+}, initialState)
 
 export default pizzas

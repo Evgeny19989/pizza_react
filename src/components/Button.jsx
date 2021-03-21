@@ -1,7 +1,7 @@
 import '../scss/app.scss'
 import classNames from 'classnames'
 
-export default function Button({outline, cart ,children,onClick}) {
+export default function Button({outline, cart, children, onClick}) {
     return (
         <button onClick={onClick} className={classNames('button',
             {
@@ -10,7 +10,6 @@ export default function Button({outline, cart ,children,onClick}) {
             {
                 'button--cart': cart
             },
-
         )}>
             {children}
         </button>

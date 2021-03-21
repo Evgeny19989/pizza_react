@@ -5,12 +5,14 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 export default function Header() {
+
     const {totalPrice,totalCnt} = useSelector(({cart}) =>{
       return {
           totalPrice:cart.totalPrice,
           totalCnt:cart.totalCnt
       }
     })
+
     return (
         <div className="header">
             <div className="container">
@@ -60,7 +62,6 @@ export default function Header() {
                             <span>{totalCnt}</span>
                         </Button>
                     </Link>
-
                 </div>
             </div>
         </div>

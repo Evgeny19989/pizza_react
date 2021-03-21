@@ -1,16 +1,17 @@
 import '../scss/app.scss'
 import React from 'react'
 import {useState} from "react";
-/*import classNames from 'classnames'*/
 
 const Categories = React.memo(
-    function Categories({items, onClick ,activeCategory}) {
+    function Categories({items, onClick, activeCategory}) {
+
         const [activeClass, setActiveClass] = useState(activeCategory)
 
         const onSelectedItem = (index) => {
             setActiveClass(index)
             onClick(index)
         }
+
         return (
             <div className="categories">
                 <ul>
@@ -25,7 +26,6 @@ const Categories = React.memo(
                         }} key={`${i}_${index}`}>{i}</li>
                     })
                     }
-
                 </ul>
             </div>
         )

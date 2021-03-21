@@ -4,12 +4,11 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import Button from "./Button";
 
-
-
-
 function PizzaBlock({id,price, name, imageUrl, types ,sizes ,onClickAddPizza,addedPizzas}) {
+
     const [activeType, setActiveType] = useState(types[0])
     const [activeSize, setActiveSize] = useState(sizes[0])
+
     const typeNames = ['тонкое' , 'традиционное'];
     const availableSizes = [26 , 30 , 40];
 
@@ -26,7 +25,6 @@ function PizzaBlock({id,price, name, imageUrl, types ,sizes ,onClickAddPizza,add
     }
 
     return (
-
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
@@ -87,6 +85,5 @@ PizzaBlock.propTypes = {
     sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
     onClickAddPizza: PropTypes.func,
 }
-
 
 export default PizzaBlock

@@ -1,8 +1,9 @@
 import './scss/app.scss'
 import {Route} from "react-router-dom";
+import * as React from "react";
+
 import {Header} from './components'
 import {Home, Cart} from './pages'
-import * as React from "react";
 
 function App() {
 
@@ -14,9 +15,7 @@ function App() {
                 <Route exact path='/cart' component={Cart}/>
             </div>
         </div>
-
     );
 }
-
 
 export default App

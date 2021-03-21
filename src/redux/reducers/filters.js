@@ -1,22 +1,19 @@
+import produce from 'immer'
+
 const initialState = {
     category: null,
-    sortBy:'popular'
+    sortBy: 'popular'
 }
 
-const filters = (state = initialState, action) => {
+const filters = produce((draft, action) => {
     if (action.type === 'SET_SORT_BUY') {
-        return {
-            ...state,
-            sortBy: action.payload
-        }
+        draft.sortBy = action.payload
     }
-    if (action.type === 'SET_CATEGORY') {
-        return {
-            ...state,
-            category: action.payload
-        }
-    }
-    return state;
-}
 
-export default  filters
+    if (action.type === 'SET_CATEGORY') {
+        draft.category = action.payload
+    }
+
+}, initialState)
+
+export default filters
